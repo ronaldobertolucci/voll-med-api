@@ -1,15 +1,21 @@
 package med.voll.api.domain.consulta.validacoes.agendamentos;
 
+import lombok.NoArgsConstructor;
 import med.voll.api.domain.consulta.ConsultaRepository;
 import med.voll.api.domain.consulta.DadosAgendamentoConsulta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@NoArgsConstructor
 public class ValidadorMedicoComOutraConsultaNoMesmoHorario implements ValidadorAgendamentoDeConsulta{
 
     @Autowired
     private ConsultaRepository repository;
+
+    public ValidadorMedicoComOutraConsultaNoMesmoHorario(ConsultaRepository repository) {
+        this.repository = repository;
+    }
 
     public void validar(DadosAgendamentoConsulta dados) {
         var inicioDoDia = dados.data().withHour(1);
